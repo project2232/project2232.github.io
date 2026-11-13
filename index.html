@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بلاغك يوصل | مدارس ابن رشد جازان</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --main:#0f6e78; --main-dark:#0a4f57; --accent:#f2a33a;
+    --bg:#f3f7f8; --card:#ffffff; --text:#1d2b2f; --muted:#64767b; --line:#dbe5e7;
+    --danger:#c0392b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Tajawal',Tahoma,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh;display:flex;flex-direction:column}
+  header{background:linear-gradient(135deg,var(--main),var(--main-dark));color:#fff;text-align:center;padding:38px 20px 70px;position:relative}
+  .logo{width:64px;height:64px;border-radius:18px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:32px}
+  header h1{font-size:34px;font-weight:800;letter-spacing:.5px}
+  header h1 span{color:var(--accent)}
+  header p.school{font-size:17px;font-weight:500;opacity:.95;margin-top:6px}
+  header p.desc{font-size:14.5px;opacity:.85;margin-top:10px;max-width:460px;margin-inline:auto}
+  main{flex:1;width:100%;max-width:560px;margin:-44px auto 0;padding:0 16px 30px;position:relative}
+  .card{background:var(--card);border-radius:20px;box-shadow:0 10px 30px rgba(15,110,120,.12);padding:24px 20px}
+  .field{margin-bottom:18px}
+  label.title{display:block;font-weight:700;font-size:15px;margin-bottom:7px}
+  label.title .req{color:var(--danger)}
+  label.title .opt{color:var(--muted);font-weight:400;font-size:13px}
+  input[type=text],input[type=tel],select,textarea{width:100%;font-family:inherit;font-size:16px;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fbfdfd;color:var(--text);transition:border .2s}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--main);background:#fff}
+  textarea{min-height:120px;resize:vertical}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chips input{display:none}
+  .chips label{padding:9px 16px;border:1.5px solid var(--line);border-radius:30px;cursor:pointer;font-size:15px;background:#fbfdfd;transition:.2s;user-select:none}
+  .chips input:checked+label{background:var(--main);border-color:var(--main);color:#fff}
+  .upload{border:2px dashed var(--line);border-radius:14px;padding:18px;text-align:center;cursor:pointer;color:var(--muted);transition:.2s;display:block}
+  .upload:hover{border-color:var(--main)}
+  .upload .ic{font-size:28px;display:block}
+  #photo{display:none}
+  #preview{display:none;margin-top:12px;position:relative}
+  #preview img{width:100%;max-height:260px;object-fit:contain;border-radius:12px;background:#eef3f4}
+  #removePhoto{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.6);color:#fff;border:none;border-radius:50%;width:32px;height:32px;font-size:18px;cursor:pointer}
+  .hint{font-size:13px;color:var(--muted);margin-top:6px}
+  .err{font-size:13px;color:var(--danger);margin-top:6px;display:none}
+  button.send{width:100%;font-family:inherit;font-size:18px;font-weight:700;padding:14px;border:none;border-radius:14px;background:var(--main);color:#fff;cursor:pointer;transition:.2s;margin-top:6px}
+  button.send:hover{background:var(--main-dark)}
+  button.send:disabled{opacity:.6;cursor:wait}
+  .success{display:none;text-align:center;padding:20px 6px}
+  .success .ic{font-size:56px}
+  .success h2{color:var(--main);margin:8px 0}
+  .success p{color:var(--muted)}
+  .success a{display:inline-block;margin-top:16px;color:var(--main);font-weight:700;text-decoration:none;border:1.5px solid var(--main);padding:9px 22px;border-radius:30px}
+  footer{text-align:center;padding:22px 16px 28px;color:var(--muted);font-size:14.5px}
+  footer strong{color:var(--main-dark);display:block;font-size:16px;margin-top:2px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🛠️</div>
+  <h1>بلاغك <span>يوصل</span></h1>
+  <p class="school">مدارس ابن رشد جازان ثنائية اللغة – بنات</p>
+  <p class="desc">واجهتك مشكلة تقنية في الدوام الحضوري أو عن بُعد؟ اكتبيها هنا وبتوصل للمسؤولة مباشرة.</p>
+</header>
+
+<main>
+  <div class="card">
+
+    <!-- ========= البريد الذي تصله البلاغات: غيّري الإيميل في السطر التالي ========= -->
+    <form id="reportForm" action="https://formsubmit.co/nouramadkhli1999@gmail.com" method="POST" enctype="multipart/form-data">
+
+      <input type="hidden" name="_subject" value="بلاغ تقني جديد - بلاغك يوصل">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" id="nextUrl" value="">
+      <input type="text" name="_honey" style="display:none">
+
+      <div class="field">
+        <label class="title" for="name">الاسم <span class="req">*</span></label>
+        <input type="text" id="name" name="الاسم" required placeholder="اكتبي اسمك">
+      </div>
+
+      <div class="field">
+        <label class="title">الصفة <span class="req">*</span></label>
+        <div class="chips">
+          <input type="radio" id="r1" name="الصفة" value="معلمة" required><label for="r1">معلمة</label>
+          <input type="radio" id="r2" name="الصفة" value="إدارية"><label for="r2">إدارية</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="title">نوع الدوام <span class="req">*</span></label>
+        <div class="chips">
+          <input type="radio" id="d1" name="نوع الدوام" value="حضوري" required><label for="d1">حضوري</label>
+          <input type="radio" id="d2" name="نوع الدوام" value="عن بُعد"><label for="d2">عن بُعد</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="title" for="type">نوع العطل <span class="req">*</span></label>
+        <select id="type" name="نوع العطل" required>
+          <option value="" disabled selected>اختاري نوع العطل</option>
+          <option>جهاز حاسب / لابتوب</option>
+          <option>شبكة الإنترنت / الواي فاي</option>
+          <option>منصة بايونير</option>
+          <option>بروجكتر / سبورة ذكية</option>
+          <option>طابعة / ماسح ضوئي</option>
+          <option>حساب أو كلمة مرور</option>
+          <option>صوت / سماعات / مايك</option>
+          <option>أخرى</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label class="title" for="place">المكان <span class="opt">(اختياري)</span></label>
+        <input type="text" id="place" name="المكان" placeholder="مثال: فصل ٢/٣ - المبنى الرئيسي">
+      </div>
+
+      <div class="field">
+        <label class="title" for="details">وصف العطل <span class="req">*</span></label>
+        <textarea id="details" name="وصف العطل" required placeholder="اشرحي المشكلة باختصار: وش صار؟ ومتى بدأت؟"></textarea>
+      </div>
+
+      <div class="field">
+        <label class="title">صورة شاهد <span class="opt">(اختياري)</span></label>
+        <label class="upload" for="photo" id="uploadBox">
+          <span class="ic">📷</span>
+          اضغطي لإرفاق صورة للعطل
+        </label>
+        <input type="file" id="photo" name="attachment" accept="image/*">
+        <div id="preview">
+          <img id="previewImg" alt="معاينة الصورة">
+          <button type="button" id="removePhoto" aria-label="حذف الصورة">×</button>
+        </div>
+        <p class="hint">الحد الأقصى لحجم الصورة ٥ ميجابايت</p>
+        <p class="err" id="photoErr">حجم الصورة كبير، اختاري صورة أصغر من ٥ ميجابايت</p>
+      </div>
+
+      <button type="submit" class="send" id="sendBtn">إرسال البلاغ</button>
+    </form>
+
+    <div class="success" id="successBox">
+      <div class="ic">✅</div>
+      <h2>وصل بلاغك!</h2>
+      <p>شكراً لك، تم استلام البلاغ وبيتم التعامل معه بأسرع وقت.</p>
+      <a href="./">إرسال بلاغ آخر</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  مبادرة معلمة الرقمية
+  <strong>نورة مدخلي</strong>
+</footer>
+
+<script>
+  var form = document.getElementById('reportForm');
+  var photo = document.getElementById('photo');
+  var preview = document.getElementById('preview');
+  var previewImg = document.getElementById('previewImg');
+  var uploadBox = document.getElementById('uploadBox');
+  var photoErr = document.getElementById('photoErr');
+
+  // صفحة الشكر بعد الإرسال
+  document.getElementById('nextUrl').value = location.href.split('?')[0] + '?sent=1';
+  if (location.search.indexOf('sent=1') !== -1) {
+    form.style.display = 'none';
+    document.getElementById('successBox').style.display = 'block';
+  }
+
+  photo.addEventListener('change', function () {
+    photoErr.style.display = 'none';
+    var f = photo.files[0];
+    if (!f) return;
+    if (f.size > 5 * 1024 * 1024) {
+      photoErr.style.display = 'block';
+      photo.value = '';
+      return;
+    }
+    previewImg.src = URL.createObjectURL(f);
+    preview.style.display = 'block';
+    uploadBox.style.display = 'none';
+  });
+
+  document.getElementById('removePhoto').addEventListener('click', function () {
+    photo.value = '';
+    preview.style.display = 'none';
+    uploadBox.style.display = 'block';
+  });
+
+  form.addEventListener('submit', function (e) {
+    if (form.action.indexOf('YOUR_EMAIL') !== -1) {
+      e.preventDefault();
+      document.getElementById('sendBtn').textContent = 'لم يتم ضبط البريد المستلم بعد';
+      return;
+    }
+    var btn = document.getElementById('sendBtn');
+    btn.disabled = true;
+    btn.textContent = 'جاري الإرسال...';
+  });
+</script>
+</body>
+</html>
